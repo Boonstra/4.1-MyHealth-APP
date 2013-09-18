@@ -1,10 +1,15 @@
 package com.example.myhealth;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,12 +53,26 @@ public class LoginActivity extends Activity {
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
+	
+	protected SharedPreferences prefs;
+
+	private Data data;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_login);
+		
+		prefs = getApplicationContext().getSharedPreferences("myPrefs", 0);
+		
+		Data.setPrefs(prefs);
+		if (prefs.getInt("id", 0) > 0) {
+			Intent intent = new Intent(this, MainActivity.class);
+		    startActivity(intent);
+		}
+		
+		
 
 		// Set up the login form.
 		mUsername = getIntent().getStringExtra(EXTRA_USERNAME);
@@ -193,23 +212,33 @@ public class LoginActivity extends Activity {
 	 * the user.
 	 */
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO: attempt authentication against a network service.
 
 			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				return false;
+				JSONObject result = Data.actionLogin(mUsername, mPassword);
+				
+				if (result.getString("message").equals("success")) {
+					Editor editor = prefs.edit();
+					
+					editor.putInt("id", result.getJSONObject("user").getInt("id"));
+					editor.putString("username", mUsername);
+					editor.putString("password", mPassword);
+					editor.commit();
+					
+					Data.setPrefs(prefs);
+					
+					return true;
+				}else {
+					return false;
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
 
-			if (DUMMY_CREDENTIALS[0].equals(mUsername)) {
-				// Account exists, return true if the password matches.
-				return DUMMY_CREDENTIALS[1].equals(mPassword);
-			}
-
-			return true;
+			return false;
 		}
 
 		@Override
@@ -217,8 +246,7 @@ public class LoginActivity extends Activity {
 			mAuthTask = null;
 			showProgress(false);
 
-			if (success) {
-				System.out.println("jaa");
+			if (success) { 
 				startMain();
 			} else {
 				mPasswordView
