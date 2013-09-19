@@ -5,5 +5,20 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
+    
+    <item android:id="@+id/measurement"
+        android:title="Measurements"
+        android:orderInCategory="1"
+        android:showAsAction="always" />
+    
+    <item android:id="@+id/urinetest"
+        android:title="Urine test"
+        android:orderInCategory="2"
+        android:showAsAction="always" />
+    
+    <item android:id="@+id/device"
+        android:title="Device"
+        android:orderInCategory="3"
+        android:showAsAction="always" />
 
 </menu>
