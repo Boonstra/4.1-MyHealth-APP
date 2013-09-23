@@ -14,7 +14,7 @@ import android.content.SharedPreferences;
 public class Data {
 		
 	private static JSONParser jParser = new JSONParser();
-	private static String dataURL = "http://10.0.2.2/myhealth/androidApi";
+	private static String dataURL = "http://10.0.2.2/myhealth/api/login";
 	private JSONObject json;
 	
 	private static List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -59,14 +59,16 @@ public class Data {
 		params.add(new BasicNameValuePair("username", username));
 		params.add(new BasicNameValuePair("password", password));
 		
-		JSONObject json = new JSONObject();
-		JSONObject user = new JSONObject();
-		json.put("message", "success");
-		user.put("id", 1);
-		json.putOpt("user", user);
+//		JSONObject json = new JSONObject();
+//		JSONObject user = new JSONObject();
+//		json.put("message", "success");
+//		user.put("id", 1);
+//		json.putOpt("user", user);
 		
 
-		return json;//jParser.makeHttpRequest(dataURL + "/" + ACTION_LOGIN, "GET", params);
+		JSONObject json = jParser.makeHttpRequest(dataURL + "/" + ACTION_LOGIN, "GET", params);
+		System.out.println(json.getString("message"));
+		return json;
 	}
 
 	/**
