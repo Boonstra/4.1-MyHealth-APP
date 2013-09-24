@@ -15,6 +15,7 @@ public class Data {
 		
 	private static JSONParser jParser = new JSONParser();
 	private static String dataURL = "http://10.0.2.2/myhealth/api/login";
+	private static String measurementsDataURL = "http://10.0.2.2/myhealth/api/measurements";
 	private JSONObject json;
 	
 	private static List<NameValuePair> params = new ArrayList<NameValuePair>();
