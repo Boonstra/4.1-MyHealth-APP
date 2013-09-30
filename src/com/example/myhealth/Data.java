@@ -21,10 +21,15 @@ public class Data {
 	
 	/* Alle mogelijke acties in de API */
 	private static final String ACTION_LOGIN = "login";
-	private static final String ACTION_GET_MES = "getMeasurements";
-	private static final String ACTION_ADD_MES = "addMeasurement";
-	private static final String ACTION_DEL_MES = "deleteMeasurement";
-	private static final String ACTION_UPLOAD_TEST = "uploadTest";
+	private static final String ACTION_DEL_MES = "measurement/delete";
+	//private static final String ACTION_UPLOAD_TEST = "uploadTest";
+	private static String ACTION_ADD_MES_BP = "bloodPressureMeasurement/add";
+	private static String ACTION_ADD_MES_PU = "pulseMeasurement/add";
+	//private static String ACTION_ADD_MES_ECG = "ECGMeasurement/add";
+	private static String ACTION_GET_MES_BP = "bloodPressureMeasurement/";
+	private static String ACTION_GET_MES_PU = "pulseMeasurement/";
+	private static String ACTION_GET_MES_ECG = "ECGMeasurement/";
+	
 	private static SharedPreferences pref;
 	
 	
@@ -57,14 +62,7 @@ public class Data {
 		params.clear();
 		
 		params.add(new BasicNameValuePair("username", username));
-		params.add(new BasicNameValuePair("password", password));
-		
-//		JSONObject json = new JSONObject();
-//		JSONObject user = new JSONObject();
-//		json.put("message", "success");
-//		user.put("id", 1);
-//		json.putOpt("user", user);
-		
+		params.add(new BasicNameValuePair("password", password));		
 
 		JSONObject json = jParser.makeHttpRequest(dataURL + "/" + ACTION_LOGIN, "GET", params);
 		System.out.println(json.getString("message"));
@@ -75,26 +73,65 @@ public class Data {
 	 * @return
 	 * @throws JSONException
 	 */
-	public static JSONObject actionGetMeasurements(String dateFrom, String dateTo) throws JSONException {		
+	public static ArrayList<String> actionGetMeasurementBloodPressure(String dateFrom, String dateTo) throws JSONException {		
+		setParams();
+		
+		params.add(new BasicNameValuePair("dateFrom", dateFrom));
+		params.add(new BasicNameValuePair("dateTo", dateTo));
+		
+		JSONObject json = jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_BP , "GET", params);
+
+		return JSONArrayToArrayList(json.getJSONArray("measurements"));
+	}
+	
+	/**
+	 * @return
+	 * @throws JSONException
+	 */
+	public static ArrayList<String> actionGetMeasurementPulse(String dateFrom, String dateTo) throws JSONException {		
 		setParams();
 		
 		params.add(new BasicNameValuePair("dateFrom", dateFrom));
 		params.add(new BasicNameValuePair("dateTo", dateTo));
 
-		return jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES, "GET", params);
-	}
+		JSONObject json = jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_PU , "GET", params);
 
+		return JSONArrayToArrayList(json.getJSONArray("measurements"));
+	}
+	
 	/**
-	 * @param temp
+	 * @return
+	 * @throws JSONException
 	 */
-	public static void actionAddMeasurement() {
+	public static JSONObject actionGetMeasurementECG(String dateFrom, String dateTo) throws JSONException {		
 		setParams();
 		
-		//params.add(new BasicNameValuePair("temp", temp));
-		
-		jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES, "GET", params);
-	}
+		params.add(new BasicNameValuePair("dateFrom", dateFrom));
+		params.add(new BasicNameValuePair("dateTo", dateTo));
 
+		return jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_ECG , "GET", params);
+	}	
+
+	public static void actionAddMeasurementBloodPressure(String datetime, int low, int high) {
+		setParams();
+
+		params.add(new BasicNameValuePair("datetime", datetime));
+		params.add(new BasicNameValuePair("low", low + ""));
+		params.add(new BasicNameValuePair("high", high + ""));	
+		
+		jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_BP, "GET", params);
+	}
+	
+	public static void actionAddMeasurementPulse(String datetime, int pulse) {
+		setParams();
+		
+		params.add(new BasicNameValuePair("datetime", datetime));
+		params.add(new BasicNameValuePair("pulse", pulse + ""));
+		
+		jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_PU, "GET", params);
+	}	
+
+	
 	/**
 	 * @param lang
 	 */
@@ -116,6 +153,15 @@ public class Data {
 		//JSONObject json = jParser.makeHttpRequest(dataURL, "GET", params);
 		
 		return null;
+	}
+	
+	public static ArrayList<String> JSONArrayToArrayList(JSONArray array) throws JSONException {
+		ArrayList<String> list = new ArrayList<String>();
+		for (int i=0; i<array.length(); i++) {
+		    list.add( array.getString(i) );
+		}
+		
+		return list;    
 	}
 	
 }
