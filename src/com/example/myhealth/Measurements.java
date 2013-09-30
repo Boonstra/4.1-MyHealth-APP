@@ -5,15 +5,19 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 
@@ -21,15 +25,17 @@ public class Measurements extends Menu_Activity {
 
 	private ProgressDialog pDialog;
 	
-	//JSONParser jParser = new JSONParser();
-		
 	private final String TAG = "Measurements";
 	
-	//JSONParser jParser = new JSONParser();
+	ArrayList<HashMap<String, String>> ;
+	ArrayList<HashMap<String, String>> pulseList;
+	ArrayList<HashMap<String, String>> measurementsList;
 	
-	ArrayList<HashMap<String, String>> measurements;
+	protected SharedPreferences prefs;
 	
-	//URL
+	
+	 // products JSONArray
+    JSONArray measurements = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +44,11 @@ public class Measurements extends Menu_Activity {
 		
 		Log.i(TAG, "Measurements clicked");
 		
+		prefs = getApplicationContext().getSharedPreferences("myPrefs", 0);
 		
-		measurements = new ArrayList<HashMap<String, String>>();
+		Data.setPrefs(prefs);
+		
+		measurementsList = new ArrayList<HashMap<String, String>>();
 		
 		new LoadAllMeasurements().execute();
 	}
@@ -59,9 +68,34 @@ public class Measurements extends Menu_Activity {
  
 		@Override
 		protected String doInBackground(String... params) {
+			
+			// Check your log cat for JSON reponse
+            Log.d("Measurements: ", json.toString());
+			
 			try {
-				// Simulate network access.
-				Thread.sleep(2000);
+				Time now = new Time();
+				now.setToNow();
+				
+				JSONObject result = Data.actionGetMeasurements(mUsername, mPassword);
+
+                // looping through All Products
+                for (int i = 0; i < ,measurements.length(); i++) {
+                    JSONObject c = measurements.getJSONObject(i);
+
+                    // Storing each json item in variable
+                    String id = c.getString(TAG_PID);
+                    String name = c.getString(TAG_NAME);
+
+                    // creating new HashMap
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    // adding each child node to HashMap key => value
+                    map.put(TAG_PID, id);
+                    map.put(TAG_NAME, name);
+
+                    // adding HashList to ArrayList
+                    productsList.add(map);
+			}
 			} catch (InterruptedException e) {
 				return null;
 			}
