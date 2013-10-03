@@ -1,5 +1,6 @@
 package com.example.myhealth;
 
+<<<<<<< HEAD
 import java.io.InputStream;
 import java.util.concurrent.ExecutionException;
 
@@ -10,11 +11,15 @@ import com.example.myhealth.Measurements.LoadAllMeasurements;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+=======
+import android.app.Activity;
+>>>>>>> origin/master
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 public class Device extends Menu_Activity {
 
 	public Bluetooth bluetooth;
@@ -25,6 +30,12 @@ public class Device extends Menu_Activity {
 	//private int numberBloodPressure = 0, numberPulse = 0, numberEcg = 0;
 	private ProgressDialog pDialog;
 
+=======
+public class Device extends Activity {
+	
+private final String TAG = "Device";
+	
+>>>>>>> origin/master
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

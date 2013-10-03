@@ -23,21 +23,27 @@ private final String TAG = "Base";
 		
 		switch(item.getItemId()){
 			
-			case R.id.measurement:
-				Log.i(TAG, "Measurements item clicked");
-				Intent intent1 = new Intent(this, Measurements.class);
+			case R.id.bloodpressure:
+				Log.i(TAG, "BloodPressure item clicked");
+				Intent intent1 = new Intent(this, BloodPressure.class);
 				startActivity(intent1);
 			return true;
 			
-			case R.id.urinetest:
-				Log.i(TAG, "Urine Test item clicked");
-				Intent intent2 = new Intent(this, UrineTest.class);
+			case R.id.pulse:
+				Log.i(TAG, "Pulse item clicked");
+				Intent intent2 = new Intent(this, Pulse.class);
 				startActivity(intent2);
 			return true;
 			
+<<<<<<< HEAD
 			case R.id.devices:
 				Log.i(TAG, "Device item clicked");
 				Intent intent3 = new Intent(this, Device.class);
+=======
+			case R.id.ecg:
+				Log.i(TAG, "ECG item clicked");
+				Intent intent3 = new Intent(this, ECG.class);
+>>>>>>> origin/master
 				startActivity(intent3);
 			return true;
 			

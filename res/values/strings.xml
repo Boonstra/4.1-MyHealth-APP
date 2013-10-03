@@ -3,6 +3,7 @@
 
     <string name="app_name">MyHealth</string>
     <string name="action_settings">Settings</string>
+<<<<<<< HEAD
     <string name="hello_world">Hello world!</string>
     <string name="main_welcome">Welcome</string>
     <string name="title_activity_bluetooth">BluetoothActivity</string>
@@ -11,5 +12,9 @@
     <string name="device_pu">Pulse measurements:</string>
     <string name="device_ecg">ECG measurements:</string>
     <string name="title_activity_blood_pressure">BloodPressure</string>
+=======
+    <string name="main_welcome">Welcome</string>
+    
+>>>>>>> origin/master
 
 </resources>
