@@ -26,4 +26,33 @@
         android:layout_alignBottom="@+id/main_welcome"
         android:layout_toRightOf="@+id/main_welcome" />
 
+    <Button
+        android:id="@+id/toMeasurements"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_username"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:onClick="toMeasurements"
+        android:text="Measurements" />
+
+    <Button
+        android:id="@+id/toUrineTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="toUrineTest"
+        android:text="Urine Test" />
+
+    <Button
+        android:id="@+id/toDevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toUrineTest"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52dp"
+        android:onClick="toDevice"
+        android:text="Device" />
+
 </RelativeLayout>

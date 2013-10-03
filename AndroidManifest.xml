@@ -26,8 +26,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        >
+        
         </activity>
+        <activity android:name="com.example.myhealth.BloodPressure"></activity>
+         <activity android:name="com.example.myhealth.Pulse"></activity>
+          <activity android:name="com.example.myhealth.ECG"></activity>
+              <activity android:name="com.example.myhealth.UrineTest"></activity>
+               <activity android:name="com.example.myhealth.Device"></activity>
     </application>
     
     <uses-permission android:name="android.permission.INTERNET"/>

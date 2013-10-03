@@ -1,10 +1,11 @@
 package com.example.myhealth;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
 
-public class Device extends Menu_Activity {
+public class Device extends Activity {
 	
 private final String TAG = "Device";
 	

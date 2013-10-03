@@ -67,10 +67,10 @@ public class LoginActivity extends Activity {
 		prefs = getApplicationContext().getSharedPreferences("myPrefs", 0);
 		
 		Data.setPrefs(prefs);
-//		if (prefs.getInt("id", 0) > 0) {
-//			Intent intent = new Intent(this, MainActivity.class);
-//		    startActivity(intent);
-//		}
+		if (prefs.getInt("id", 0) > 0) {
+		Intent intent = new Intent(this, MainActivity.class);
+	    startActivity(intent);
+		}
 		
 		
 
