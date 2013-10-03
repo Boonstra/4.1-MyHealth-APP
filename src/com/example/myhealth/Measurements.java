@@ -39,6 +39,7 @@ public class Measurements extends Menu_Activity {
 		Log.i(TAG, "Measurements clicked");
 		
 		
+		
 		measurements = new ArrayList<HashMap<String, String>>();
 		
 		new LoadAllMeasurements().execute();

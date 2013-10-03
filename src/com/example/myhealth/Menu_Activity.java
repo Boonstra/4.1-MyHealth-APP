@@ -35,7 +35,7 @@ private final String TAG = "Base";
 				startActivity(intent2);
 			return true;
 			
-			case R.id.device:
+			case R.id.devices:
 				Log.i(TAG, "Device item clicked");
 				Intent intent3 = new Intent(this, Device.class);
 				startActivity(intent3);

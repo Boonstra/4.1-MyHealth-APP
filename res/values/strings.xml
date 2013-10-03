@@ -5,5 +5,11 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="main_welcome">Welcome</string>
+    <string name="title_activity_bluetooth">BluetoothActivity</string>
+    <string name="device_receiving">Connecting...</string>
+    <string name="device_bp">Blood measurements:</string>
+    <string name="device_pu">Pulse measurements:</string>
+    <string name="device_ecg">ECG measurements:</string>
+    <string name="title_activity_blood_pressure">BloodPressure</string>
 
 </resources>

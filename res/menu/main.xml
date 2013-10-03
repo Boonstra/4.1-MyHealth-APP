@@ -16,7 +16,7 @@
         android:orderInCategory="2"
         android:showAsAction="always" />
     
-    <item android:id="@+id/device"
+    <item android:id="@+id/devices"
         android:title="Device"
         android:orderInCategory="3"
         android:showAsAction="always" />

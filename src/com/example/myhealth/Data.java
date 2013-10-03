@@ -14,7 +14,7 @@ import android.content.SharedPreferences;
 public class Data {
 		
 	private static JSONParser jParser = new JSONParser();
-	private static String dataURL = "http://10.0.2.2/myhealth/api/login";
+	private static String dataURL = "http://145.37.80.143/myhealth/api";
 	private JSONObject json;
 	
 	private static List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -112,23 +112,31 @@ public class Data {
 		return jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_ECG , "GET", params);
 	}	
 
-	public static void actionAddMeasurementBloodPressure(String datetime, int low, int high) {
+	public static void actionAddMeasurementBloodPressure(String datetime, int low, int high) throws JSONException {
 		setParams();
-
+//		params.clear();
+//		params.add(new BasicNameValuePair("username", "user"));
+//		params.add(new BasicNameValuePair("password", "user"));
 		params.add(new BasicNameValuePair("datetime", datetime));
 		params.add(new BasicNameValuePair("low", low + ""));
 		params.add(new BasicNameValuePair("high", high + ""));	
 		
-		jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_BP, "GET", params);
+		JSONObject json = jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_BP, "GET", params);
+		
+		System.out.println("--" + datetime + "-" + low + "-" + high + "--");
 	}
 	
 	public static void actionAddMeasurementPulse(String datetime, int pulse) {
 		setParams();
-		
+//		params.clear();
+//		params.add(new BasicNameValuePair("username", "user"));
+//		params.add(new BasicNameValuePair("password", "user"));
 		params.add(new BasicNameValuePair("datetime", datetime));
-		params.add(new BasicNameValuePair("pulse", pulse + ""));
+		params.add(new BasicNameValuePair("value", pulse + ""));	
 		
 		jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_PU, "GET", params);
+		
+		System.out.println("--" + datetime + "-" + pulse + "--");
 	}	
 
 	
