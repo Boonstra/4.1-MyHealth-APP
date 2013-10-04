@@ -114,11 +114,26 @@ public class Data {
 	 * @return
 	 * @throws JSONException
 	 */
-	public static JSONObject actionGetMeasurementECG(String dateFrom, String dateTo) throws JSONException {		
+	public static JSONObject actionGetMeasurementECG(int limit, int offset) throws JSONException {		
+		setParams();
+		
+		params.add(new BasicNameValuePair("limit", Integer.toString(limit)));
+		params.add(new BasicNameValuePair("offset", Integer.toString(offset)));
+
+		return jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_ECG , "GET", params);
+	}
+	
+	/**
+	 * @return
+	 * @throws JSONException
+	 */
+	public static JSONObject actionGetMeasurementECG(String dateFrom, String dateTo, int limit, int offset) throws JSONException {		
 		setParams();
 		
 		params.add(new BasicNameValuePair("dateFrom", dateFrom));
 		params.add(new BasicNameValuePair("dateTo", dateTo));
+		params.add(new BasicNameValuePair("limit", Integer.toString(limit)));
+		params.add(new BasicNameValuePair("offset", Integer.toString(offset)));
 
 		return jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_ECG , "GET", params);
 	}	
