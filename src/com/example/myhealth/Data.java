@@ -14,7 +14,7 @@ import android.content.SharedPreferences;
 public class Data {
 		
 	private static JSONParser jParser = new JSONParser();
-	private static String dataURL = "http://10.0.2.2/yii/sites/4.1-MyHealth-WEB/api";
+	private static String dataURL = "http://10.0.2.2/4.1-MyHealth-WEB/api";
 	private JSONObject json;
 	
 	private static List<NameValuePair> params = new ArrayList<NameValuePair>();

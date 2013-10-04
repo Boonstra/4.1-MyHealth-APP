@@ -79,10 +79,9 @@ public class Pulse extends Menu_Activity {
 				ArrayList<JSONObject> result = Data.actionGetMeasurementPulse("2013-09-01 00:00:00", "2013-12-01 00:00:00");
 				
 				PMarray = new  PulseMeasurement[result.size()];
-				
 				for (int i = 0, len = result.size(); i < len; i++) {
-					JSONObject obj = result.get(i);
-					PMarray[i] = new PulseMeasurement(obj.getInt("pulseValue"),obj.getString("datetime"));
+					JSONObject obj = result.get(i);					
+					PMarray[i] = new PulseMeasurement(obj.getInt("value"),obj.getString("datetime"));
 				}
 
 				
