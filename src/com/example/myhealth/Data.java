@@ -120,7 +120,12 @@ public class Data {
 		params.add(new BasicNameValuePair("limit", Integer.toString(limit)));
 		params.add(new BasicNameValuePair("offset", Integer.toString(offset)));
 
-		return jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_ECG , "GET", params);
+		JSONObject json = jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_ECG , "GET", params);
+		
+		System.out.println(dataURL + "/" + ACTION_GET_MES_ECG);
+		System.out.println(json.toString());
+		
+		return json;
 	}
 	
 	/**
