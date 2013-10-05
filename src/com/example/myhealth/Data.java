@@ -14,8 +14,7 @@ import android.content.SharedPreferences;
 public class Data {
 		
 	private static JSONParser jParser = new JSONParser();
-	//private static String dataURL = "http://10.0.2.2/4.1-MyHealth-WEB/api";
-	private static String dataURL = "http://192.168.0.6/yii/sites/4.1-MyHealth-WEB/api";
+	private static String dataURL = "http://10.0.2.2/4.1-MyHealth-WEB/api";
 	private JSONObject json;
 	
 	private static List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -120,12 +119,7 @@ public class Data {
 		params.add(new BasicNameValuePair("limit", Integer.toString(limit)));
 		params.add(new BasicNameValuePair("offset", Integer.toString(offset)));
 
-		JSONObject json = jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_ECG , "GET", params);
-		
-		System.out.println(dataURL + "/" + ACTION_GET_MES_ECG);
-		System.out.println(json.toString());
-		
-		return json;
+		return jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_ECG , "GET", params);
 	}
 	
 	/**

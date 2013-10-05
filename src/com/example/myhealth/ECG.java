@@ -1,7 +1,5 @@
 package com.example.myhealth;
 
-import java.util.ArrayList;
-
 import org.achartengine.GraphicalView;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,7 +8,6 @@ import org.json.JSONObject;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,12 +40,12 @@ public class ECG extends Menu_Activity {
 		Data.setPrefs(prefs);
 		
 		chartsLinearLayout = (LinearLayout) findViewById(R.id.chartsLinearLayout);
-
+		
+		// Load ECG data
 		LoadECG loadECG = new LoadECG();
 		
 		loadECG.setContext(this);
 		
-		// Load ECG data
 		loadECG.execute();
 	}
 	
@@ -69,9 +66,9 @@ public class ECG extends Menu_Activity {
 		TextView chartTitleTextView = (TextView) newECGChart.findViewById(R.id.chartTitleTextView);
 		
 		chartTitleTextView.setText(chartTitle);
-
+		
 		// Get chart element
-		LinearLayout linearLayout = (LinearLayout) newECGChart.findViewById(R.id.chartsLinearLayout);
+		LinearLayout linearLayout = (LinearLayout) newECGChart.findViewById(R.id.chartLinearLayout);
 		
 		linearLayout.addView(graphicalView);
 		
@@ -84,20 +81,20 @@ public class ECG extends Menu_Activity {
 	 */
 	private class LoadECG extends AsyncTask<String, String, JSONArray>
 	{
-		protected Context context;
-		
 		protected ProgressDialog progressDialog;
 		
+		protected Context context;
+		
 		/**
-		 * Being able to use the context is necessary to load the ECG measurements into a chart
+		 * The context is needed to be able to adapt the right view.
 		 * 
 		 * @param context
 		 */
-		protected void setContext(Context context)
+		public void setContext(Context context)
 		{
 			this.context = context;
 		}
-		
+
 		@Override
 		protected void onPreExecute()
 		{
@@ -163,7 +160,7 @@ public class ECG extends Menu_Activity {
 					{
 						// Get measurement
 						JSONObject measurement = measurements.getJSONObject(i);
-						
+
 						// Build a new ECG chart using the ECGChartBuilder, using the retrieved measurement. Add the chart to the view
 						addChartToChartsLinearLayout(new ECGChartBuilder(measurement.getString("value")).buildECGChart(context), "ECG Track " + (i + 1));
 					}
