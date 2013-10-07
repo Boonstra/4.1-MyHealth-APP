@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
-
+ 
     <TextView
         android:id="@+id/main_welcome"
         android:layout_width="wrap_content"
@@ -25,8 +25,6 @@
         android:layout_alignBaseline="@+id/main_welcome"
         android:layout_alignBottom="@+id/main_welcome"
         android:layout_toRightOf="@+id/main_welcome" />
-<<<<<<< HEAD
-=======
 
     <Button
         android:id="@+id/toMeasurements"
@@ -56,6 +54,5 @@
         android:layout_marginTop="52dp"
         android:onClick="toDevice"
         android:text="Device" />
->>>>>>> origin/master
 
 </RelativeLayout>

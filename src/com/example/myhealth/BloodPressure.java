@@ -66,7 +66,6 @@ private ListView bloodPressureListView = null;
 				
 				aa = new ArrayAdapter<JSONObject>( BloodPressure.this, android.R.layout.simple_list_item_1, result);
 				
-				
 				runOnUiThread(new Runnable() {
 				     public void run() {
 

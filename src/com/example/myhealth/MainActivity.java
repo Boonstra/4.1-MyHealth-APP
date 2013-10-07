@@ -2,20 +2,15 @@ package com.example.myhealth;
 
 import android.os.Bundle;
 import android.app.Activity;
-<<<<<<< HEAD
-import android.content.SharedPreferences;
-import android.view.Menu;
-=======
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
->>>>>>> origin/master
+
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-	
-	private SharedPreferences prefs;
 	
 	private final String TAG = "Main";
 
@@ -23,17 +18,14 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.activity_main);
 		
 		prefs = getApplicationContext().getSharedPreferences("myPrefs", 0);
 		
 		TextView view = (TextView) findViewById(R.id.main_username);
 		view.setText(" " + prefs.getString("username", null) + "!");
-<<<<<<< HEAD
-		
-=======
->>>>>>> origin/master
+
 	}
 	
 	public void toMeasurements(View v){

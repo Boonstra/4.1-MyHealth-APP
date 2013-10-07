@@ -14,11 +14,9 @@ import android.content.SharedPreferences;
 public class Data {
 		
 	private static JSONParser jParser = new JSONParser();
-<<<<<<< HEAD
-	private static String dataURL = "http://145.37.80.143/myhealth/api";
-=======
-	private static String dataURL = "http://10.0.2.2/yii/sites/4.1-MyHealth-WEB/api";
->>>>>>> origin/master
+
+	private static String dataURL = "http://10.0.2.2/myhealth/api";
+
 	private JSONObject json;
 	
 	private static List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -29,13 +27,12 @@ public class Data {
 	//private static final String ACTION_UPLOAD_TEST = "uploadTest";
 	private static String ACTION_ADD_MES_BP = "bloodPressureMeasurement/add";
 	private static String ACTION_ADD_MES_PU = "pulseMeasurement/add";
-	//private static String ACTION_ADD_MES_ECG = "ECGMeasurement/add";
+	private static String ACTION_ADD_MES_ECG = "ECGMeasurement/add";
 	private static String ACTION_GET_MES_BP = "bloodPressureMeasurement/";
 	private static String ACTION_GET_MES_PU = "pulseMeasurement/";
 	private static String ACTION_GET_MES_ECG = "ECGMeasurement/";
 	
 	private static SharedPreferences pref;
-	
 	
 	public Data(SharedPreferences pref) {	
 		this.pref = pref;
@@ -77,24 +74,16 @@ public class Data {
 	 * @return
 	 * @throws JSONException
 	 */
-<<<<<<< HEAD
-	public static ArrayList<String> actionGetMeasurementBloodPressure(String dateFrom, String dateTo) throws JSONException {		
-=======
 	public static ArrayList<JSONObject> actionGetMeasurementBloodPressure(String dateFrom, String dateTo) throws JSONException {		
->>>>>>> origin/master
 		setParams();
 		
 		params.add(new BasicNameValuePair("dateFrom", dateFrom));
 		params.add(new BasicNameValuePair("dateTo", dateTo));
 		
 		JSONObject json = jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_BP , "GET", params);
-<<<<<<< HEAD
 
-=======
+		System.out.println(dataURL + "/" + ACTION_GET_MES_BP);
 		
-		System.out.println(json.toString());
-		
->>>>>>> origin/master
 		return JSONArrayToArrayList(json.getJSONArray("measurements"));
 	}
 	
@@ -102,22 +91,14 @@ public class Data {
 	 * @return
 	 * @throws JSONException
 	 */
-<<<<<<< HEAD
-	public static ArrayList<String> actionGetMeasurementPulse(String dateFrom, String dateTo) throws JSONException {		
-=======
 	public static ArrayList<JSONObject> actionGetMeasurementPulse(String dateFrom, String dateTo) throws JSONException {		
->>>>>>> origin/master
 		setParams();
 		
 		params.add(new BasicNameValuePair("dateFrom", dateFrom));
 		params.add(new BasicNameValuePair("dateTo", dateTo));
 
 		JSONObject json = jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_PU , "GET", params);
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> origin/master
 		return JSONArrayToArrayList(json.getJSONArray("measurements"));
 	}
 	
@@ -134,49 +115,32 @@ public class Data {
 		return jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_ECG , "GET", params);
 	}	
 
-<<<<<<< HEAD
-	public static void actionAddMeasurementBloodPressure(String datetime, int low, int high) throws JSONException {
-		setParams();
-//		params.clear();
-//		params.add(new BasicNameValuePair("username", "user"));
-//		params.add(new BasicNameValuePair("password", "user"));
-=======
 	public static void actionAddMeasurementBloodPressure(String datetime, int low, int high) {
 		setParams();
 
->>>>>>> origin/master
 		params.add(new BasicNameValuePair("datetime", datetime));
 		params.add(new BasicNameValuePair("low", low + ""));
 		params.add(new BasicNameValuePair("high", high + ""));	
-		
-<<<<<<< HEAD
-		JSONObject json = jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_BP, "GET", params);
-		
-		System.out.println("--" + datetime + "-" + low + "-" + high + "--");
-=======
+		System.out.println(datetime + "--" + low + "--" + high);
 		jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_BP, "GET", params);
->>>>>>> origin/master
 	}
 	
 	public static void actionAddMeasurementPulse(String datetime, int pulse) {
 		setParams();
-<<<<<<< HEAD
-//		params.clear();
-//		params.add(new BasicNameValuePair("username", "user"));
-//		params.add(new BasicNameValuePair("password", "user"));
-		params.add(new BasicNameValuePair("datetime", datetime));
-		params.add(new BasicNameValuePair("value", pulse + ""));	
-		
-		jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_PU, "GET", params);
-		
-		System.out.println("--" + datetime + "-" + pulse + "--");
-=======
 		
 		params.add(new BasicNameValuePair("datetime", datetime));
-		params.add(new BasicNameValuePair("pulse", pulse + ""));
+		params.add(new BasicNameValuePair("value", pulse + ""));
 		
 		jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_PU, "GET", params);
->>>>>>> origin/master
+	}	
+	
+	public static void actionAddMeasurementECG(String datetime, String data) {
+		setParams();
+		
+		params.add(new BasicNameValuePair("datetime", datetime));
+		params.add(new BasicNameValuePair("value", data + ""));
+		
+		jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_ECG, "GET", params);
 	}	
 
 	
@@ -203,24 +167,13 @@ public class Data {
 		return null;
 	}
 	
-<<<<<<< HEAD
-	public static ArrayList<String> JSONArrayToArrayList(JSONArray array) throws JSONException {
-		ArrayList<String> list = new ArrayList<String>();
-		for (int i=0; i<array.length(); i++) {
-		    list.add( array.getString(i) );
-=======
 	public static ArrayList<JSONObject> JSONArrayToArrayList(JSONArray array) throws JSONException {
 		ArrayList<JSONObject> list = new ArrayList<JSONObject>();
 		for (int i=0; i<array.length(); i++) {
 		    list.add( array.getJSONObject(i) );
->>>>>>> origin/master
 		}
 		
 		return list;    
 	}
 	
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master

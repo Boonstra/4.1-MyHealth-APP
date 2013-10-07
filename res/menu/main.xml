@@ -16,13 +16,8 @@
         android:orderInCategory="2"
         android:showAsAction="always" />
     
-<<<<<<< HEAD
-    <item android:id="@+id/devices"
-        android:title="Device"
-=======
     <item android:id="@+id/ecg"
         android:title="ECG"
->>>>>>> origin/master
         android:orderInCategory="3"
         android:showAsAction="always" />
 </menu>

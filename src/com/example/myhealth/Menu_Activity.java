@@ -35,15 +35,10 @@ private final String TAG = "Base";
 				startActivity(intent2);
 			return true;
 			
-<<<<<<< HEAD
-			case R.id.devices:
-				Log.i(TAG, "Device item clicked");
-				Intent intent3 = new Intent(this, Device.class);
-=======
 			case R.id.ecg:
 				Log.i(TAG, "ECG item clicked");
 				Intent intent3 = new Intent(this, ECG.class);
->>>>>>> origin/master
+
 				startActivity(intent3);
 			return true;
 			
