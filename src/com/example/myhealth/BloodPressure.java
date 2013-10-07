@@ -72,13 +72,25 @@ public class BloodPressure extends Menu_Activity {
 				System.out.println("nope");
 
 				ArrayList<JSONObject> result = Data.actionGetMeasurementBloodPressure("2013-09-01 00:00:00", "2013-12-01 00:00:00");
-				
+
 				BPMarray = new  BPMeasurement[result.size()];
 				
 				for (int i = 0, len = result.size(); i < len; i++) {
 					JSONObject obj = result.get(i);
 					BPMarray[i] = new BPMeasurement(obj.getInt("high"),obj.getInt("low"),obj.getString("datetime"));
 				}
+
+				ArrayList<JSONObject> result = Data.actionGetMeasurementBloodPressure("2013-09-01 00:00:00", "2013-12-01 00:00:00");	
+				
+				aa = new ArrayAdapter<JSONObject>( BloodPressure.this, android.R.layout.simple_list_item_1, result);
+				
+				runOnUiThread(new Runnable() {
+				     public void run() {
+
+				//stuff that updates ui
+				    	 bloodPressureListView.setAdapter(aa);
+				    }
+				});
 
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

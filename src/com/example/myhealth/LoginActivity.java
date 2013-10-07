@@ -68,8 +68,9 @@ public class LoginActivity extends Activity {
 		
 		Data.setPrefs(prefs);
 		if (prefs.getInt("id", 0) > 0) {
-		Intent intent = new Intent(this, MainActivity.class);
-	    startActivity(intent);
+			Intent intent = new Intent(this, MainActivity.class);
+		    startActivity(intent);
+
 		}
 		
 		

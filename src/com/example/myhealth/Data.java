@@ -14,7 +14,9 @@ import android.content.SharedPreferences;
 public class Data {
 		
 	private static JSONParser jParser = new JSONParser();
-	private static String dataURL = "http://10.0.2.2/4.1-MyHealth-WEB/api";
+
+	private static String dataURL = "http://10.0.2.2/myhealth/api";
+
 	private JSONObject json;
 	
 	private static List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -25,13 +27,12 @@ public class Data {
 	//private static final String ACTION_UPLOAD_TEST = "uploadTest";
 	private static String ACTION_ADD_MES_BP = "bloodPressureMeasurement/add";
 	private static String ACTION_ADD_MES_PU = "pulseMeasurement/add";
-	//private static String ACTION_ADD_MES_ECG = "ECGMeasurement/add";
+	private static String ACTION_ADD_MES_ECG = "ECGMeasurement/add";
 	private static String ACTION_GET_MES_BP = "bloodPressureMeasurement/";
 	private static String ACTION_GET_MES_PU = "pulseMeasurement/";
 	private static String ACTION_GET_MES_ECG = "ECGMeasurement/";
 	
 	private static SharedPreferences pref;
-	
 	
 	public Data(SharedPreferences pref) {	
 		this.pref = pref;
@@ -86,11 +87,6 @@ public class Data {
 		
 		JSONObject json = jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_BP , "GET", params);
 		
-		if (json != null)
-		{
-			System.out.println(json.toString());
-		}
-		
 		return JSONArrayToArrayList(json.getJSONArray("measurements"));
 	}
 	
@@ -105,7 +101,7 @@ public class Data {
 		params.add(new BasicNameValuePair("dateTo", dateTo));
 
 		JSONObject json = jParser.makeHttpRequest(dataURL + "/" + ACTION_GET_MES_PU , "GET", params);
-		
+
 		return JSONArrayToArrayList(json.getJSONArray("measurements"));
 	}
 	
@@ -143,7 +139,7 @@ public class Data {
 		params.add(new BasicNameValuePair("datetime", datetime));
 		params.add(new BasicNameValuePair("low", low + ""));
 		params.add(new BasicNameValuePair("high", high + ""));	
-		
+		System.out.println(datetime + "--" + low + "--" + high);
 		jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_BP, "GET", params);
 	}
 	
@@ -151,9 +147,18 @@ public class Data {
 		setParams();
 		
 		params.add(new BasicNameValuePair("datetime", datetime));
-		params.add(new BasicNameValuePair("pulse", pulse + ""));
+		params.add(new BasicNameValuePair("value", pulse + ""));
 		
 		jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_PU, "GET", params);
+	}	
+	
+	public static void actionAddMeasurementECG(String datetime, String data) {
+		setParams();
+		
+		params.add(new BasicNameValuePair("datetime", datetime));
+		params.add(new BasicNameValuePair("value", data + ""));
+		
+		jParser.makeHttpRequest(dataURL + "/" + ACTION_ADD_MES_ECG, "GET", params);
 	}	
 
 	
@@ -190,4 +195,3 @@ public class Data {
 	}
 	
 }
-

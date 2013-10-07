@@ -24,8 +24,8 @@ public class Device extends Activity {
 	protected Thread thread;
 	private InputStream inputStream;
 	public TextView output;
-	//private TextView bloodPressure, pulse, ecg;
-	//private int numberBloodPressure = 0, numberPulse = 0, numberEcg = 0;
+	private TextView bloodPressure, pulse, ecg;
+	private int numberBloodPressure = 0, numberPulse = 0, numberEcg = 0;
 	private ProgressDialog pDialog;
 
 	@Override
@@ -37,9 +37,9 @@ public class Device extends Activity {
 		
 		output = (TextView) findViewById(R.id.device_output);
 		
-//		bloodPressure = (TextView) findViewById(R.id.device_bp);
-//		pulse = (TextView) findViewById(R.id.device_pu);
-//		ecg = (TextView) findViewById(R.id.device_ecg);
+		bloodPressure = (TextView) findViewById(R.id.device_bp);
+		pulse = (TextView) findViewById(R.id.device_pu);
+		ecg = (TextView) findViewById(R.id.device_ecg);
 		
 		bluetooth = new Bluetooth();
 		bluetooth.isEnabled();
@@ -106,25 +106,45 @@ public class Device extends Activity {
 		Data.setPrefs(getApplicationContext().getSharedPreferences("myPrefs", 0));
 		
 		for ( String dataString : dataArray) {
-			String[] dataArray2 = dataString.split("/");
+			final String[] dataArray2 = dataString.split("/");
 			
 			if (dataArray2[0].equals("bp")) {
 
-				Data.actionAddMeasurementBloodPressure(dataArray2[1], Integer.parseInt(dataArray2[2]), Integer.parseInt(dataArray2[3]));
-				//System.out.println("aantal:" + numberBloodPressure);
-				//numberBloodPressure ++;
-				//System.out.println("aantal:" + numberBloodPressure);
-				//bloodPressure.setText("asdasdsad");
+				new Thread() {
+					@Override
+					public void run() {
+						Data.actionAddMeasurementBloodPressure(dataArray2[1], Integer.parseInt(dataArray2[2]), Integer.parseInt(dataArray2[3]));
+					}
+				}.start();
+				
+				numberBloodPressure ++;
+				bloodPressure.setText(numberBloodPressure + " ");
 				
 			}else if (dataArray2[0].equals("pu")) {
-				Data.actionAddMeasurementPulse(dataArray2[1], Integer.parseInt(dataArray2[2]));
-				//numberPulse ++;
-				//pulse.setText(numberPulse + " ");
+				
+				new Thread() {
+					@Override
+					public void run() {
+						Data.actionAddMeasurementPulse(dataArray2[1], Integer.parseInt(dataArray2[2]));
+					}
+				}.start();
+				
+				numberPulse ++;
+				pulse.setText(numberPulse + " ");
+				
 			}else if (dataArray2[0].equals("ecg")) {
-				//Data.uploadMeasurement(ecg); TODO
+				
+				new Thread() {
+					@Override
+					public void run() {
+						Data.actionAddMeasurementECG(dataArray2[1], dataArray2[2]);
+					}
+				}.start();
+				
+				numberEcg ++;
+				ecg.setText(numberEcg + " ");
+				
 			}
 		}
-		
 	}
-
 }

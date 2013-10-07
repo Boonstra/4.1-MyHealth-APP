@@ -38,6 +38,7 @@ private final String TAG = "Base";
 			case R.id.ecg:
 				Log.i(TAG, "ECG item clicked");
 				Intent intent3 = new Intent(this, ECG.class);
+
 				startActivity(intent3);
 			return true;
 			
